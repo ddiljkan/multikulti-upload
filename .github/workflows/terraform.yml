@@ -1,0 +1,53 @@
+name: Terraform
+
+# Runs format-check and validate on every PR that touches Terraform files,
+# and on pushes to main. Free on public repos.
+#
+# It does NOT run `terraform plan` — that would require Hetzner and Cloudflare
+# tokens stored as secrets, and for a hobby project this is overkill.
+# Validation alone catches ~95% of mistakes (syntax, missing variables,
+# wrong types, undeclared resources).
+
+on:
+  pull_request:
+    paths:
+      - "terraform/**"
+      - ".github/workflows/terraform.yml"
+  push:
+    branches: [main]
+    paths:
+      - "terraform/**"
+      - ".github/workflows/terraform.yml"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate:
+    name: fmt + validate
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: terraform
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.9.8"
+          terraform_wrapper: false
+
+      - name: terraform fmt
+        id: fmt
+        run: terraform fmt -check -recursive -diff
+
+      - name: terraform init (no backend)
+        run: terraform init -backend=false -input=false
+
+      - name: terraform validate
+        id: validate
+        run: terraform validate -no-color

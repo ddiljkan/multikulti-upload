@@ -1,0 +1,30 @@
+name: ShellCheck
+
+# Lints all shell scripts in scripts/ on every change.
+# Catches the classic shell footguns: unquoted variables, missing `set -e`,
+# typos in variable names, etc.
+
+on:
+  pull_request:
+    paths:
+      - "scripts/**"
+      - ".github/workflows/shellcheck.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - ".github/workflows/shellcheck.yml"
+
+jobs:
+  shellcheck:
+    name: shellcheck scripts/
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: ./scripts
+          severity: warning
