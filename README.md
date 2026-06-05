@@ -75,7 +75,8 @@ start at [docs/01-prerequisites.md](docs/01-prerequisites.md).
 │   ├── 05-teardown-and-restore.md  # Pause between events to save money
 │   ├── 06-troubleshooting.md       # Common issues + fixes
 │   ├── architecture.md             # Mermaid diagrams
-│   └── onboarding-helper.md        # One-pager for a non-technical club helper
+│   ├── onboarding-helper.md        # One-pager for a non-technical club helper
+│   └── deploy-log.md               # Running record of what's deployed
 ├── terraform/
 │   ├── main.tf                     # Hetzner server, firewall, SSH key, Cloudflare DNS
 │   ├── variables.tf

@@ -1,0 +1,16 @@
+# CODEOWNERS — auto-requests review from the listed owners on every PR.
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-configuration/customizing-your-repository/about-code-owners
+#
+# Order matters: the LAST matching pattern takes precedence. Keep the
+# catch-all at the top, then add more-specific overrides below if ever needed.
+
+# Default — everything in the repo is owned by Dejan
+*                       @ddiljkan
+
+# Infra (Terraform + cloud-init + workflows): require explicit infra review
+/terraform/             @ddiljkan
+/.github/workflows/     @ddiljkan
+/.github/dependabot.yml @ddiljkan
+
+# Operational docs that an external contributor might tweak — still go to Dejan
+/docs/                  @ddiljkan
