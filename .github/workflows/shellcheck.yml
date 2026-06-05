@@ -3,17 +3,15 @@ name: ShellCheck
 # Lints all shell scripts in scripts/ on every change.
 # Catches the classic shell footguns: unquoted variables, missing `set -e`,
 # typos in variable names, etc.
+#
+# Runs on ALL PRs (no path filter) so that branch protection rules that
+# require this check to pass can never be bypassed by a docs-only PR.
+# Cost: ~10 s of Actions time per PR that doesn't touch scripts/.
 
 on:
   pull_request:
-    paths:
-      - "scripts/**"
-      - ".github/workflows/shellcheck.yml"
   push:
     branches: [main]
-    paths:
-      - "scripts/**"
-      - ".github/workflows/shellcheck.yml"
 
 jobs:
   shellcheck:
