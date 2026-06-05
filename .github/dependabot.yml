@@ -51,6 +51,12 @@ updates:
     labels:
       - "dependencies"
       - "terraform"
+    ignore:
+      # Cloudflare v5 renamed cloudflare_record → cloudflare_dns_record
+      # and changed several attribute schemas. Pin to v4 until we do a
+      # dedicated migration PR. Remove this block after migrating.
+      - dependency-name: "cloudflare/cloudflare"
+        versions: [">= 5.0.0"]
     groups:
       tf-providers-minor:
         applies-to: version-updates
