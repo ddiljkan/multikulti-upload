@@ -1,0 +1,34 @@
+###############################################################################
+# Copy this file to terraform.tfvars and fill in the secrets.
+# terraform.tfvars is gitignored — never commit it.
+###############################################################################
+
+# --- Required: API tokens ---
+hcloud_token         = "PASTE_HETZNER_CLOUD_PROJECT_TOKEN_HERE"
+cloudflare_api_token = "PASTE_CLOUDFLARE_API_TOKEN_HERE"
+cloudflare_zone_id   = "PASTE_CLOUDFLARE_ZONE_ID_FOR_kud-mladost.org_HERE"
+
+# --- Hostnames & contact ---
+# The full FQDN where clubs will upload. Must be a record under the Cloudflare
+# zone above. The subdomain part is created automatically.
+hostname    = "multikulti-2026.kud-mladost.org"
+admin_email = "dejan.diljkan@outlook.com"
+
+# --- Server sizing & placement ---
+hetzner_location = "fsn1"       # fsn1 = Falkenstein (DE), nbg1 = Nuremberg, hel1 = Helsinki
+server_type      = "cx22"       # cx22 = x86 (€4.49), cax11 = ARM (same price)
+server_image     = "ubuntu-24.04"
+
+# --- SSH ---
+ssh_public_key_path = "~/.ssh/id_ed25519.pub"
+# Optionally restrict SSH source IPs:
+# ssh_allowed_cidrs = ["203.0.113.42/32"]
+
+# --- Backups ---
+enable_hetzner_backups = true   # +20 % surcharge; daily snapshot, 7-day retention
+
+# --- App ---
+# Once the actively-maintained Pingvin Share X fork is confirmed, replace with
+# e.g. "ghcr.io/<fork-org>/pingvin-share-x:latest".
+pingvin_image      = "stonith404/pingvin-share:latest"
+max_upload_size_mb = 50

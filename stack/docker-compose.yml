@@ -1,0 +1,44 @@
+# Reference copy of the compose stack that cloud-init writes to
+# /srv/pingvin/docker-compose.yml on the VPS.
+#
+# Kept here so you can read it without SSH'ing in, and so changes
+# survive in version control.
+#
+# To apply changes to a running VPS: edit this file, scp it up, and
+# run docker compose up -d on the VPS.
+#
+# Note: cloud-init also writes /srv/pingvin/Caddyfile from terraform.
+# If you change Caddyfile here, copy it up the same way.
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - pingvin
+
+  pingvin:
+    # Swap to the maintained Pingvin Share X image once confirmed:
+    # image: ghcr.io/<fork-org>/pingvin-share-x:latest
+    image: stonith404/pingvin-share:latest
+    container_name: pingvin
+    restart: unless-stopped
+    environment:
+      - TRUST_PROXY=true
+    volumes:
+      - ./data:/opt/app/backend/data
+      - ./data/images:/opt/app/frontend/public/img
+    expose:
+      - "3000"
+
+volumes:
+  caddy_data:
+  caddy_config:
