@@ -1,7 +1,12 @@
 name: Terraform
 
-# Runs format-check and validate on every PR that touches Terraform files,
-# and on pushes to main. Free on public repos.
+# Runs format-check and validate on every PR and on pushes to main.
+# Free on public repos.
+#
+# Runs on ALL PRs (no path filter) so that branch protection rules that
+# require this check to pass can never be bypassed by a docs-only PR.
+# Cost: ~20 s of Actions time per PR that doesn't touch Terraform —
+# negligible on a hobby repo, and unlimited on public repos anyway.
 #
 # It does NOT run `terraform plan` — that would require Hetzner and Cloudflare
 # tokens stored as secrets, and for a hobby project this is overkill.
@@ -10,14 +15,8 @@ name: Terraform
 
 on:
   pull_request:
-    paths:
-      - "terraform/**"
-      - ".github/workflows/terraform.yml"
   push:
     branches: [main]
-    paths:
-      - "terraform/**"
-      - ".github/workflows/terraform.yml"
 
 permissions:
   contents: read
