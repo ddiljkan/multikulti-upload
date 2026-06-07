@@ -6,8 +6,8 @@ cloud-init runs).
 ## Step 1 — Clone and configure
 
 ```bash
-git clone <your-repo-url> gig-upload-platform
-cd gig-upload-platform/terraform
+git clone <your-repo-url> multikulti-upload-platform
+cd multikulti-upload-platform/terraform
 
 cp terraform.tfvars.example terraform.tfvars
 $EDITOR terraform.tfvars

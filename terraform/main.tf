@@ -15,7 +15,7 @@ provider "cloudflare" {
 ###############################################################################
 
 resource "hcloud_ssh_key" "admin" {
-  name       = "${var.project_name}-admin"
+  name       = "${var.project_name}-admin-kp"
   public_key = file(pathexpand(var.ssh_public_key_path))
 }
 
@@ -106,7 +106,7 @@ resource "cloudflare_record" "app_v4" {
   content = hcloud_server.app.ipv4_address
   ttl     = 1 # auto, required when proxied
   proxied = true
-  comment = "Managed by Terraform — gig-upload-platform"
+  comment = "Managed by Terraform — multikulti-upload-platform"
 }
 
 resource "cloudflare_record" "app_v6" {
@@ -116,5 +116,5 @@ resource "cloudflare_record" "app_v6" {
   content = hcloud_server.app.ipv6_address
   ttl     = 1
   proxied = true
-  comment = "Managed by Terraform — gig-upload-platform"
+  comment = "Managed by Terraform — multikulti-upload-platform"
 }

@@ -28,7 +28,7 @@ You also need a working SSH keypair. If `~/.ssh/id_ed25519.pub` doesn't
 exist, generate one:
 
 ```bash
-ssh-keygen -t ed25519 -C "dejan@gig-upload"
+ssh-keygen -t ed25519 -C "dejan@multikulti-upload"
 ```
 
 ## API tokens to create
@@ -36,7 +36,7 @@ ssh-keygen -t ed25519 -C "dejan@gig-upload"
 ### 1. Hetzner Cloud API token
 
 1. Go to <https://console.hetzner.cloud> → select (or create) a project
-   called `gig-upload`.
+   called `multikulti-upload`.
 2. Left sidebar: **Security → API Tokens**.
 3. **Generate API token**:
    - Description: `terraform`
@@ -49,7 +49,7 @@ ssh-keygen -t ed25519 -C "dejan@gig-upload"
 1. Go to <https://dash.cloudflare.com/profile/api-tokens>.
 2. **Create Token** → **Get started** (custom token).
 3. Configure:
-   - Name: `terraform-gig-upload`
+   - Name: `terraform-multikulti-upload`
    - Permissions:
      - `Zone` → `DNS` → `Edit`
    - Zone Resources:
