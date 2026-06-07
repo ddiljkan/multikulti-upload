@@ -26,7 +26,7 @@ variable "cloudflare_zone_id" {
 variable "project_name" {
   description = "Short slug used to label Hetzner resources."
   type        = string
-  default     = "gig-upload"
+  default     = "multikulti-upload"
 }
 
 variable "hostname" {
