@@ -27,7 +27,7 @@ The snapshot preserves Pingvin's data, config, and admin account.
 Useful if you want exact continuity next time.
 
 ```bash
-hcloud server create-image gig-upload-01 \
+hcloud server create-image multikulti-upload-01 \
   --type snapshot \
   --description "post-multikulti-2026"
 ```

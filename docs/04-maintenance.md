@@ -48,7 +48,7 @@ After reboot, Docker auto-restarts the stack (the containers have
 Already enabled via `enable_hetzner_backups = true`. Hetzner takes a
 daily snapshot, keeps the last 7. Restore via the Hetzner console:
 
-1. <https://console.hetzner.cloud> → server `gig-upload-01` → **Backups**.
+1. <https://console.hetzner.cloud> → server `multikulti-upload-01` → **Backups**.
 2. Click any snapshot → **Restore**.
 
 This restores the entire VM (OS + Pingvin data) to that point in time.
@@ -59,7 +59,7 @@ Before a major update, take an ad-hoc snapshot:
 
 ```bash
 # Install Hetzner CLI locally first: brew install hcloud
-hcloud server create-image gig-upload-01 \
+hcloud server create-image multikulti-upload-01 \
   --type snapshot \
   --description "pre-update-$(date +%F)"
 ```
